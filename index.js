@@ -3,6 +3,7 @@ const constants = require('./constants');
 const prompt = require("prompt-sync")();
 let lives = constants.HANGMAN_PICS.length;
 
+
 // Here you see an example how to get your
 // constants from constants.js
 // for(let figure of constants.HANGMAN_PICS)
