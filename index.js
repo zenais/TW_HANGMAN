@@ -2,6 +2,8 @@ const constants = require('./constants');
 // In node.js: install a prompt library by running: `npm install prompt-sync` in the current folder
 const prompt = require("prompt-sync")();
 
+// IS THIS THINK WORKING!!?!?!?!?!
+
 // Here you see an example how to get your
 // constants from constants.js
 // for(let figure of constants.HANGMAN_PICS)
