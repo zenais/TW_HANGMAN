@@ -15,3 +15,7 @@ let lives = constants.HANGMAN_PICS.length;
 
 // how to use the prompt - e.g.:
 // const name = prompt('What is your name?');
+
+
+
+// Test bitte löschen nach lesen!
