@@ -4,6 +4,7 @@ const prompt = require("prompt-sync")();
 
 // IS THIS THINK WORKING!!?!?!?!?!
 // Thomas: Hello?!
+// Test2 Mark
 
 // Here you see an example how to get your
 // constants from constants.js
