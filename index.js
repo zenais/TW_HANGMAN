@@ -1,10 +1,9 @@
 const constants = require('./constants');
 // In node.js: install a prompt library by running: `npm install prompt-sync` in the current folder
 const prompt = require("prompt-sync")();
+let lives = constants.HANGMAN_PICS.length;
 
-// IS THIS THINK WORKING!!?!?!?!?!
-// Thomas: Hello?!
-// Test2 Mark
+
 
 // Here you see an example how to get your
 // constants from constants.js
