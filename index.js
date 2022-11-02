@@ -77,6 +77,7 @@ while (loopGoesOn === true) {
   if (lives <= 0) {
     console.log(`GAME OVER`);
     loopGoesOn = false;
+    break;
   }
   if (topScore === randomWord.length) {
     console.log(`YOU WIN`);
@@ -146,7 +147,7 @@ function displayUnderscores() {
 function checkStatus() {
   for (i = 0; i < randomWord.length; i++) {
     if (arrayRandomWord[i] === letter && revealedLetters.includes(letter)) {
-      arrayDisplayStatus[i] = letter;
+      arrayDisplayStatus[i] = letter +' ';
     }
   }
 }
