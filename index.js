@@ -1,7 +1,7 @@
 const { WORDS_TO_GUESS, HANGMAN_PICS } = require("./constants");
 const constants = require("./constants");
 // In node.js: install a prompt library by running: `npm install prompt-sync` in the current folder
-const prompt = require("prompt-sync")();
+const prompt = require("prompt-sync")({sigint: true});
 
 // Here you see an example how to get your
 // constants from constants.js
@@ -21,13 +21,25 @@ let revealedLetters = [];
 let lives = constants.HANGMAN_PICS.length;
 //console.log(`Lives: ${constants.HANGMAN_PICS.length}`); //CONTROL
 //add variable random Word from content.js
-let randomWord =
-WORDS_TO_GUESS[Math.floor(Math.random() * WORDS_TO_GUESS.length)];
+let randomWord = "";
+//WORDS_TO_GUESS[Math.floor(Math.random() * WORDS_TO_GUESS.length)];
 //console.log(randomWord); //CONTROL
 // console.log(`Letters / TopScore: ${randomWord.length}`); //CONTROL
 // let x = randomWord.toLowerCase().split(''); //CONTROL
 // console.log(`Second Letter: ${x[2]}`); //CONTROL
-let arrayRandomWord = putCharactersToArray();
+let arrayRandomWord = [];// = putCharactersToArray();
+//###########INTRO SCREEN#############
+console.clear();
+// display intro screen and ask for difficulty level e/n/h
+let difficulty = introScreen();
+let wordList = generateWordlist(difficulty); 
+
+randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+arrayRandomWord = putCharactersToArray(randomWord);
+console.log(arrayRandomWord);
+prompt();
+
+//####################################
 //console.log(arrayRandomWord); //CONTROL
 
 //add display line
@@ -40,15 +52,6 @@ let letter = "";
 letter = letter.toLowerCase();
 //add Loop (Gameplay)
 
-//###########INTRO SCREEN#############
-console.clear();
-// display intro screen and ask for difficulty level e/n/h
-let startDifficulty = introScreen();
-let wordList = [] = generateWordlist(); 
-console.log(wordList);
-prompt();
-
-//####################################
 
 while (loopGoesOn === true) {
   // insert image of hangman, image shall stay at the same positoin in terminal
@@ -71,7 +74,7 @@ while (loopGoesOn === true) {
     console.log(`"${letter}" is correct`);
     usedLetters.push(letter);
     //revealedLetters.push(letter);
-    checkStatus();
+    // checkStatus();
     // for (i = 0; i < arrayRandomWord.length; i++) {
       //   if arrayRandomWord[i] === letter {
         
@@ -87,6 +90,7 @@ while (loopGoesOn === true) {
   if (lives <= 0) {
     //console.log(`GAME OVER`);
     //GAME OVER console line replaced with ascii art
+    console.clear();
     console.log(constants.LOSE_SCREEN);
     loopGoesOn = false;
     break;
@@ -94,6 +98,7 @@ while (loopGoesOn === true) {
   if (topScore === randomWord.length) {
     //console.log(`YOU WIN`);
     //YOU WIN console line replaced with ascii art
+    console.clear();
     console.log(constants.HAPPY_HANGMAN_PIC);
     console.log(constants.WIN_SCREEN); 
     loopGoesOn = false;
@@ -103,27 +108,28 @@ while (loopGoesOn === true) {
 
   
   letter = prompt("Guess a letter!");
+  checkStatus();
 }
 
-function generateWordlist() {
-  let wordList = [];
-  if (startDifficulty === "e") {
+function generateWordlist(difficulty) {
+  let wordListTmp = [];
+  if (difficulty === "e") {
     for (let word of WORDS_TO_GUESS) {
       if (word.length <= 5)
-        wordList.push(word);
+        wordListTmp.push(word);
     }
-  } else if (startDifficulty === "n") {
+  } else if (difficulty === "n") {
     for (let word of WORDS_TO_GUESS) {
       if (word.length > 5 && word.length < 10)
-        wordList.push(word);
+        wordListTmp.push(word);
     }
-  } else if (startDifficulty === "h") {
+  } else if (difficulty === "h") {
     for (let word of WORDS_TO_GUESS) {
       if (word.length >= 10)
-        wordList.push(word);
+        wordListTmp.push(word);
     }
   }
-  return wordList;
+  return wordListTmp;
 }
 
 function introScreen() {
@@ -140,6 +146,7 @@ function introScreen() {
     if (level === "e" || level === "n" || level === "h") {
       break;
     }
+    else (prompt("No such option available"));
   };
   return level;
 }
@@ -163,7 +170,7 @@ function checkLives() {
   // + display GAME OVERgit
 }
 function quitGame() {}
-function putCharactersToArray() {
+function putCharactersToArray(randomWord) {
   // let chars = randomWord.toLowerCase().split('');
   // let array =[]
   // for (i = 0; i < randomWord.length; i++) {
