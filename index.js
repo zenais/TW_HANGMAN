@@ -22,44 +22,58 @@ let lives = constants.HANGMAN_PICS.length;
 //console.log(`Lives: ${constants.HANGMAN_PICS.length}`); //CONTROL
 //add variable random Word from content.js
 let randomWord =
-  WORDS_TO_GUESS[Math.floor(Math.random() * WORDS_TO_GUESS.length)];
+WORDS_TO_GUESS[Math.floor(Math.random() * WORDS_TO_GUESS.length)];
 //console.log(randomWord); //CONTROL
 // console.log(`Letters / TopScore: ${randomWord.length}`); //CONTROL
 // let x = randomWord.toLowerCase().split(''); //CONTROL
 // console.log(`Second Letter: ${x[2]}`); //CONTROL
 let arrayRandomWord = putCharactersToArray();
 //console.log(arrayRandomWord); //CONTROL
+
+//add display line
+let arrayDisplayStatus = displayUnderscores();
 //add variable for looping
 let loopGoesOn = true;
 //add variable for score
 let topScore = 0;
 let letter = "";
+letter = letter.toLowerCase();
 //add Loop (Gameplay)
 
 while (loopGoesOn === true) {
+  // insert image of hangman, image shall stay at the same positoin in terminal
   console.clear();
+  
   displayHangman();
+  console.log(arrayDisplayStatus.join(""));
   // letter = prompt('Guess a letter!');
-  letter = letter.toLowerCase();
   if (letter === "quit") {
     console.log(`GOOD-BYE`);
     loopGoesOn = false;
+    break;
   } else if (letter === "") {
     null;
-  } else if (letter.length !== 1) {
-    console.log(`Your entry is invalid!`);
+  } else if (letter.length !== 1 && /^[A-Za-z]/.test(letter)) {
+    console.log(`Your entry "${letter}" is invalid!`);
   } else if (usedLetters.includes(letter)) {
     console.log(`You already revealed this letter. Choose another one!`);
   } else if (arrayRandomWord.includes(letter.toLowerCase()) === true) {
     console.log(`"${letter}" is correct`);
     usedLetters.push(letter);
-    topScore = topScore + countLettersInArray(letter);
-    //console.log(countLettersInArray(letter)); //CONTROL
-  } else if (arrayRandomWord.includes(letter.toLowerCase()) === false) {
-    console.log(`"${letter}" is wrong`);
-    usedLetters.push(letter);
-    lives = lives - 1;
-  }
+    revealedLetters.push(letter);
+    checkStatus();
+    // for (i = 0; i < arrayRandomWord.length; i++) {
+      //   if arrayRandomWord[i] === letter {
+        
+        //   }
+        // }
+        topScore = topScore + countLettersInArray(letter);
+        //console.log(countLettersInArray(letter)); //CONTROL
+      } else if (arrayRandomWord.includes(letter.toLowerCase()) === false) {
+        console.log(`"${letter}" is wrong`);
+        usedLetters.push(letter);
+        lives = lives - 1;
+      }
   if (lives <= 0) {
     console.log(`GAME OVER`);
     loopGoesOn = false;
@@ -69,11 +83,13 @@ while (loopGoesOn === true) {
     loopGoesOn = false;
     break;
   }
+
+
+  
   letter = prompt("Guess a letter!");
 }
 
 ///////// TODO:
-// insert Animation, but using console.clear to stay at the same positoin in terminal
 // add difficulty levels eg. word with character (3-5) easy, (5-8) normal, >8hard
 // The art sequence is adapted to the starting value of the lives parameter(at least between 3 and 7) – this means that the game over art is always the same.
 // display undercores and show revealed letters
@@ -83,7 +99,7 @@ while (loopGoesOn === true) {
 // Add functions:
 function displayHangman() {
   let picNo = HANGMAN_PICS.length - lives;
-  console.log(`Guess all the letters!`);
+  console.log(`Guess all the letters! \n ("quit" to exit game)`);
   console.log(HANGMAN_PICS[picNo]);
 }
 function checkEntry() {}
@@ -111,4 +127,26 @@ function countLettersInArray(inputLetter) {
     }
   }
   return sameLetters;
+}
+function displayUnderscores() {
+  let array = [];
+  for (i = 0; i < arrayRandomWord.length; i++) {
+    if (arrayRandomWord[i] === ' ') {
+      array.push('  ');
+    } else if (arrayRandomWord[i] === '-') {
+      array.push('- ');
+    } else if (arrayRandomWord[i] === '.') {
+      array.push('. ');
+    } else {
+      array.push('_ ');
+    }
+  }
+  return array;
+}
+function checkStatus() {
+  for (i = 0; i < randomWord.length; i++) {
+    if (arrayRandomWord[i] === letter && revealedLetters.includes(letter)) {
+      arrayDisplayStatus[i] = letter;
+    }
+  }
 }
