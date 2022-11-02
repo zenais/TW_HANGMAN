@@ -44,16 +44,7 @@ letter = letter.toLowerCase();
 console.clear();
 // display intro screen and ask for difficulty level e/n/h
 let startDifficulty = introScreen();
-let wordList = [];
-if (startDifficulty === "e"){
-  for (let word of WORDS_TO_GUESS){
-    if (word.length <= 5 ) wordList.push(word);
-  }
-}else if (startDifficulty === "n"){
-  for (let word of WORDS_TO_GUESS){
-    if (word.length <= 5 ) wordList.push(word);
-  }
-}
+let wordList = [] = generateWordlist(); 
 console.log(wordList);
 prompt();
 
@@ -79,7 +70,7 @@ while (loopGoesOn === true) {
   } else if (arrayRandomWord.includes(letter.toLowerCase()) === true) {
     console.log(`"${letter}" is correct`);
     usedLetters.push(letter);
-    revealedLetters.push(letter);
+    //revealedLetters.push(letter);
     checkStatus();
     // for (i = 0; i < arrayRandomWord.length; i++) {
       //   if arrayRandomWord[i] === letter {
@@ -112,6 +103,27 @@ while (loopGoesOn === true) {
 
   
   letter = prompt("Guess a letter!");
+}
+
+function generateWordlist() {
+  let wordList = [];
+  if (startDifficulty === "e") {
+    for (let word of WORDS_TO_GUESS) {
+      if (word.length <= 5)
+        wordList.push(word);
+    }
+  } else if (startDifficulty === "n") {
+    for (let word of WORDS_TO_GUESS) {
+      if (word.length > 5 && word.length < 10)
+        wordList.push(word);
+    }
+  } else if (startDifficulty === "h") {
+    for (let word of WORDS_TO_GUESS) {
+      if (word.length >= 10)
+        wordList.push(word);
+    }
+  }
+  return wordList;
 }
 
 function introScreen() {
@@ -188,7 +200,7 @@ function displayUnderscores() {
 }
 function checkStatus() {
   for (i = 0; i < randomWord.length; i++) {
-    if (arrayRandomWord[i] === letter && revealedLetters.includes(letter)) {
+    if (arrayRandomWord[i] === letter /* && revealedLetters.includes(letter) */) {
       arrayDisplayStatus[i] = letter +' ';
     }
   }
