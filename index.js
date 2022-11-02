@@ -148,7 +148,7 @@ function displayHangman() {
 function checkEntry() {}
 function checkRepetition() {}
 function checkLives() {
-  // + display GAME OVER
+  // + display GAME OVERgit
 }
 function quitGame() {}
 function putCharactersToArray() {
@@ -189,7 +189,7 @@ function displayUnderscores() {
 function checkStatus() {
   for (i = 0; i < randomWord.length; i++) {
     if (arrayRandomWord[i] === letter && revealedLetters.includes(letter)) {
-      arrayDisplayStatus[i] = letter;
+      arrayDisplayStatus[i] = letter +' ';
     }
   }
 }
