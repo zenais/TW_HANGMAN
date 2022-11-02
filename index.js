@@ -40,6 +40,16 @@ let letter = "";
 letter = letter.toLowerCase();
 //add Loop (Gameplay)
 
+//###########INTRO SCREEN#############
+console.clear();
+//display intro screen and ask for difficulty level e/n/h
+// let startDifficulty = introScreen();
+// if (startDifficulty === "e"){
+//   for (let i = 0; i < WORDS_TO_GUESS; i++)
+// }
+
+//####################################
+
 while (loopGoesOn === true) {
   // insert image of hangman, image shall stay at the same positoin in terminal
   console.clear();
@@ -75,11 +85,17 @@ while (loopGoesOn === true) {
         lives = lives - 1;
       }
   if (lives <= 0) {
-    console.log(`GAME OVER`);
+    //console.log(`GAME OVER`);
+    //GAME OVER console line replaced with ascii art
+    console.log(constants.LOSE_SCREEN);
     loopGoesOn = false;
+    break;
   }
   if (topScore === randomWord.length) {
-    console.log(`YOU WIN`);
+    //console.log(`YOU WIN`);
+    //YOU WIN console line replaced with ascii art
+    console.log(constants.HAPPY_HANGMAN_PIC);
+    console.log(constants.WIN_SCREEN); 
     loopGoesOn = false;
     break;
   }
@@ -87,6 +103,24 @@ while (loopGoesOn === true) {
 
   
   letter = prompt("Guess a letter!");
+}
+
+function introScreen() {
+  let level = "n";
+
+  while (true) {
+    console.log(constants.INTRO_SCREEN);
+    console.log(
+      "Pick difficulty level \n" +
+      "EASY \t 3 - 5 letters (e)\n" +
+      "NORMAL \t 6 - 9 letters t(n)\n" +
+      "HARD \t 10 -  letters(h)\n");
+    level = prompt("e/n/h  :  ");
+    if (level === "e" || level === "n" || level === "h") {
+      break;
+    }
+  };
+  return level;
 }
 
 ///////// TODO:

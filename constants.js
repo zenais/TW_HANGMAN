@@ -80,7 +80,7 @@ const WIN_SCREEN =
 "  Y)yy   O)    oo U)    uu    W)  ww  ww   I)   N) nn nn    !)11 !)11 !)11 \n"+
 "   Y)    O)    oo U)    uu    W)  ww  ww   I)   N)  nnnn     !)   !)   !)  \n"+
 "   Y)    O)    oo U)    uu    W)  ww  ww   I)   N)   nnn                   \n"+
-"   Y)     O)oooo   U)uuuu      W)ww www  I)iiii N)    nn     !)   !)   !)  ";
+"   Y)     O)oooo   U)uuuu      W)ww www  I)iiii N)    nn     !)   !)   !)  \n\n\n\n";
 
 const LOSE_SCREEN =
 "Y)    yy  O)oooo  U)    uu    L)        O)oooo   S)ssss  E)eeeeee     !)   !)   !)  \n"+
@@ -88,7 +88,7 @@ const LOSE_SCREEN =
 "  Y)yy   O)    oo U)    uu    L)       O)    oo  S)ss    E)eeeee     !)11 !)11 !)11 \n"+
 "   Y)    O)    oo U)    uu    L)       O)    oo      S)  E)           !)   !)   !)  \n"+
 "   Y)    O)    oo U)    uu    L)       O)    oo S)    ss E)                         \n"+
-"   Y)     O)oooo   U)uuuu     L)llllll  O)oooo   S)ssss  E)eeeeee     !)   !)   !) ";
+"   Y)     O)oooo   U)uuuu     L)llllll  O)oooo   S)ssss  E)eeeeee     !)   !)   !) \n\n\n\n";
 
 // TODO: Fill this list with values about a certain topic
 // you are passionate about: e.g. famous scientists, chess players, ...
@@ -302,5 +302,6 @@ module.exports = {
   WORDS_TO_GUESS: WORDS_TO_GUESS,
   HAPPY_HANGMAN_PIC: HAPPY_HANGMAN_PIC,
   WIN_SCREEN: WIN_SCREEN,
-  LOSE_SCREEN: LOSE_SCREEN
+  LOSE_SCREEN: LOSE_SCREEN,
+  INTRO_SCREEN: INTRO_SCREEN
 };
