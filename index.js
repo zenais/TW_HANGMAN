@@ -106,7 +106,7 @@ function displayHangman() {
 function checkEntry() {}
 function checkRepetition() {}
 function checkLives() {
-  // + display GAME OVER
+  // + display GAME OVERgit
 }
 function quitGame() {}
 function putCharactersToArray() {
