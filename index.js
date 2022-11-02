@@ -42,11 +42,20 @@ letter = letter.toLowerCase();
 
 //###########INTRO SCREEN#############
 console.clear();
-//display intro screen and ask for difficulty level e/n/h
-// let startDifficulty = introScreen();
-// if (startDifficulty === "e"){
-//   for (let i = 0; i < WORDS_TO_GUESS; i++)
-// }
+// display intro screen and ask for difficulty level e/n/h
+let startDifficulty = introScreen();
+let wordList = [];
+if (startDifficulty === "e"){
+  for (let word of WORDS_TO_GUESS){
+    if (word.length <= 5 ) wordList.push(word);
+  }
+}else if (startDifficulty === "n"){
+  for (let word of WORDS_TO_GUESS){
+    if (word.length <= 5 ) wordList.push(word);
+  }
+}
+console.log(wordList);
+prompt();
 
 //####################################
 
