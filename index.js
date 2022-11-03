@@ -1,15 +1,9 @@
 const { WORDS_TO_GUESS, HANGMAN_PICS } = require("./constants");
 const constants = require("./constants");
-// In node.js: install a prompt library by running: `npm install prompt-sync` in the current folder
 const prompt = require("prompt-sync")({ sigint: true });
 
 let usedLetters = []; //add array for letters
 let lives = constants.HANGMAN_PICS.length; //add variable lives
-
-//console.log(`Lives: ${constants.HANGMAN_PICS.length}`); //CONTROL
-//console.log(randomWord); //CONTROL
-// let x = randomWord.toLowerCase().split(''); //CONTROL
-// console.log(`Second Letter: ${x[2]}`); //CONTROL
 
 //###########INTRO SCREEN#############
 let difficulty = introScreen();
@@ -19,25 +13,20 @@ let randomWord = wordList[Math.floor(Math.random() * wordList.length)];
 
 let arrayRandomWord = randomWord.toLowerCase().split("");
 
-//console.log(arrayRandomWord); //CONTROL
-
 let arrayDisplayStatus = displayUnderscores(); //add display line
 let loopGoesOn = true; //add variable for looping
 let topScore = 0; //add variable for score
 let letter = ""; //add nothing so Startscreen doesnt display invaled input from beginning
 let consoleMessage = "";
-//add Loop (Gameplay)
 
 console.clear();
 
 while (loopGoesOn === true) {
   displayHangman();
-  //console.log(lives); //CONTROL
   console.log(`${arrayDisplayStatus.join("")} \n`);
   console.log(consoleMessage);
 
   letter = prompt("Guess a letter! ");
-  //letter = letter.toLowerCase(); //so input is always lower case
 
   if (letter.toLowerCase() === "quit") {
     quitGame();
@@ -124,7 +113,10 @@ function introScreen() {
   }
   return level;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 //purpose: displays HANGMAN image depending on lives status
 function displayHangman() {
   let picNo = HANGMAN_PICS.length - lives;
@@ -135,7 +127,6 @@ function displayHangman() {
 function quitGame() {
   console.log(`GOOD-BYE`);
   loopGoesOn = false;
-  //return ('GOOD-BYE')
 }
 
 //purpose: counts same letter in arrayRandomWord, later to use for subtraction from topscore
@@ -148,6 +139,10 @@ function amountOfSameLetters() {
   }
   return sameLetters;
 }
+//purpose: creates array; adds underscore-values in array
+//if arrayRandomWord-values are not space, minus or dot; adds space, minus and dots as it is in array
+//argument: null
+//return: array with underscore values
 function displayUnderscores() {
   let array = [];
   for (i = 0; i < arrayRandomWord.length; i++) {
@@ -163,6 +158,7 @@ function displayUnderscores() {
   }
   return array;
 }
+//purpose: creates array out of randomWord; if values from arrayRandomWord equal to letter it changes arrayDisplayStatus-value to randomWord value
 function checkStatus() {
   let array = randomWord.split("");
 
@@ -172,6 +168,9 @@ function checkStatus() {
     }
   }
 }
+//purpose: create variable; counts n if array value is not space, dot or minus to compare with topScore
+//argument: array
+//return: number of same letters
 function onlyCountLettersInArray(array) {
   let n = 0;
   for (let i = 0; i < array.length; i++) {
@@ -181,33 +180,43 @@ function onlyCountLettersInArray(array) {
   }
   return n;
 }
+//purpose: display if input invalid
 function ifInputInvalid() {
   return `Your entry "${letter}" is invalid!`;
 }
 function ifUsedLetter() {
+<<<<<<< HEAD
   return `You already revealed "${letter}". Choose another letter! \n Used letters ${usedLetters.join(", ")}`;
+=======
+  return `You already revealed "${letter}". Choose another letter! \nUsed Letters: ${usedLetters.join(", ")}`;
+
+>>>>>>> main
 }
+//purpose: adds and sorts correct letter into usedLetters-array; counts topScore
+//argument: null
+//return: correct letter text; 
 function ifLetterCorrect() {
   usedLetters.push(letter.toLowerCase());
+  usedLetters.sort();
   topScore = topScore + amountOfSameLetters();
-  //console.log(amountOfSameLetters()); //CONTROL
   return `"${letter}" is correct`;
 }
+//purpose: adds and sorts correct letter into usedLetters-array; counts lives
+//argument: null
+//return: wrong letter text; 
 function ifLetterWrong() {
   usedLetters.push(letter.toLowerCase());
+  usedLetters.sort();
   lives = lives - 1;
   return `"${letter}" is wrong`;
 }
+//purpose: displays dead hangman; sets loop to false
 function displayGameOver() {
-  //console.log(`GAME OVER`);
-  //GAME OVER console line replaced with ascii art
   console.log(constants.LOSE_SCREEN);
   loopGoesOn = false;
 }
+//purpose: displays happy hangman; sets loop to false
 function displayGameWin() {
-  //console.log(`YOU WIN`);
-  //YOU WIN console line replaced with ascii art
-  console.log(constants.HAPPY_HANGMAN_PIC);
   console.log(constants.WIN_SCREEN);
   loopGoesOn = false;
 }
