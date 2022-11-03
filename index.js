@@ -14,7 +14,6 @@ let lives = constants.HANGMAN_PICS.length; //add variable lives
 
 
 //###########INTRO SCREEN#############
-console.clear();
 // display intro screen and ask for difficulty level e/n/h
 let difficulty = introScreen();
 let wordList = generateWordlist(difficulty); 
@@ -33,6 +32,7 @@ let letter = ""; //add nothing so Startscreen doesnt display invaled input from 
 let consoleMessage = '';
 //add Loop (Gameplay)
 
+console.clear();
 
 while (loopGoesOn === true) {
   displayHangman();
@@ -96,28 +96,28 @@ function introScreen() {
   let level = "n";
   
   while (true) {
+    console.clear();
     console.log(constants.INTRO_SCREEN);
     console.log(
       "(\"quit\" to exit game) \n" +
       "Pick difficulty level \n" +
-      "EASY \t 3 - 5 letters (e)\n" +
-      "NORMAL \t 6 - 9 letters t(n)\n" +
-      "HARD \t 10 -  letters(h)\n");
+      "EASY \t 3 - 5 letters \t(e)\n" +
+      "NORMAL \t 6 - 9 letters \t(n)\n" +
+      "HARD \t >10   letters \t(h)\n");
     level = prompt("e/n/h  :  ");
     if (level === "e" || level === "n" || level === "h") {
       break;
     } else if (level === "quit"){
+      console.log(`GOOD-BYE`)
       process.exit(1);
-    } else (prompt("No such option available"));
+    } else (prompt("No such option available "));
   };
   return level;
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////// TODO:
-// The art sequence is adapted to the starting value of the lives parameter(at least between 3 and 7) – this means that the game over art is always the same.
-// clean code
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// Add functions:
+//Add functions:
+
 function displayHangman() {
   let picNo = HANGMAN_PICS.length - lives;
   console.log(`Guess all the letters! \n("quit" to exit game) \n`);
@@ -130,9 +130,9 @@ function checkLives() {
 }
 
 function quitGame() {
-  //console.log(`GOOD-BYE`);
+  console.log(`GOOD-BYE`);
   loopGoesOn = false;
-  return ('GOOD-BYE')
+  //return ('GOOD-BYE')
 }
 
 // why count letters
@@ -183,7 +183,7 @@ function ifInputInvalid() {
   return `Your entry "${letter}" is invalid!`;
 }
 function ifUsedLetter() {
-  return `You already revealed this letter. Choose another one!`;
+  return `You already revealed "${letter}". Choose another letter!`;
 }
 function ifLetterCorrect() {
   usedLetters.push(letter);
