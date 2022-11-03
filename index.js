@@ -113,10 +113,6 @@ function introScreen() {
   }
   return level;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 //purpose: displays HANGMAN image depending on lives status
 function displayHangman() {
   let picNo = HANGMAN_PICS.length - lives;
@@ -185,12 +181,7 @@ function ifInputInvalid() {
   return `Your entry "${letter}" is invalid!`;
 }
 function ifUsedLetter() {
-<<<<<<< HEAD
-  return `You already revealed "${letter}". Choose another letter! \n Used letters ${usedLetters.join(", ")}`;
-=======
-  return `You already revealed "${letter}". Choose another letter! \nUsed Letters: ${usedLetters.join(", ")}`;
-
->>>>>>> main
+  return `You already revealed "${letter}". Choose another letter! \nUsed letters ${usedLetters.join(", ")}`;
 }
 //purpose: adds and sorts correct letter into usedLetters-array; counts topScore
 //argument: null
