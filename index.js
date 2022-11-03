@@ -3,30 +3,15 @@ const constants = require("./constants");
 // In node.js: install a prompt library by running: `npm install prompt-sync` in the current folder
 const prompt = require("prompt-sync")({sigint: true});
 
-// Here you see an example how to get your
-// constants from constants.js
-// for(let figure of constants.HANGMAN_PICS)
-// {
-//     console.log(figure);
-// }
 
-// how to use the prompt - e.g.:
-// const name = prompt('What is your name?');
+let usedLetters = []; //add array for letters
+let lives = constants.HANGMAN_PICS.length; //add variable lives
 
-//THOMAS
-//add array for letters
-let usedLetters = [];
-// let revealedLetters = [];
-//add variable lives
-let lives = constants.HANGMAN_PICS.length;
 //console.log(`Lives: ${constants.HANGMAN_PICS.length}`); //CONTROL
-//add variable random Word from content.js
-//WORDS_TO_GUESS[Math.floor(Math.random() * WORDS_TO_GUESS.length)];
 //console.log(randomWord); //CONTROL
-// console.log(`Letters / TopScore: ${randomWord.length}`); //CONTROL
 // let x = randomWord.toLowerCase().split(''); //CONTROL
 // console.log(`Second Letter: ${x[2]}`); //CONTROL
-// let arrayRandomWord = putCharactersToArray();
+
 
 //###########INTRO SCREEN#############
 console.clear();
@@ -34,77 +19,55 @@ console.clear();
 let difficulty = introScreen();
 let wordList = generateWordlist(difficulty); 
 let randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-let arrayRandomWord = putCharactersToArray(randomWord);
 
 //####################################
+
+let arrayRandomWord = randomWord.toLowerCase().split("");
+
 //console.log(arrayRandomWord); //CONTROL
 
-//add display line
-let arrayDisplayStatus = displayUnderscores();
-//add variable for looping
-let loopGoesOn = true;
-//add variable for score
-let topScore = 0;
-let letter = "";
-letter = letter.toLowerCase();
+let arrayDisplayStatus = displayUnderscores(); //add display line
+let loopGoesOn = true; //add variable for looping
+let topScore = 0; //add variable for score
+let letter = ""; //add nothing so Startscreen doesnt display invaled input from beginning
+let consoleMessage = '';
 //add Loop (Gameplay)
 
 
 while (loopGoesOn === true) {
-  // insert image of hangman, image shall stay at the same positoin in terminal
-  console.clear();
-  
   displayHangman();
-  console.log(arrayDisplayStatus.join(""));
-  // letter = prompt('Guess a letter!');
+  //console.log(lives); //CONTROL
+  console.log(`${arrayDisplayStatus.join("")} \n`);
+  console.log(consoleMessage);
+
+  letter = prompt("Guess a letter!");
+  //letter = letter.toLowerCase(); //so input is always lower case
+  
   if (letter === "quit") {
-    console.log(`GOOD-BYE`);
-    loopGoesOn = false;
+    quitGame();
     break;
   } else if (letter === "") {
-    null;
-  } else if (letter.length !== 1 && /^[A-Za-z]/.test(letter)) {
-    console.log(`Your entry "${letter}" is invalid!`);
+    null; //add nothing so Startscreen doesnt display invaled input from beginning
+    consoleMessage = '';
+  } else if (letter.length !== 1 || /^[A-Za-z]/.test(letter) === false) {
+    consoleMessage = ifInputInvalid();
   } else if (usedLetters.includes(letter)) {
-    console.log(`You already revealed this letter. Choose another one!`);
+    consoleMessage = ifUsedLetter();
   } else if (arrayRandomWord.includes(letter.toLowerCase()) === true) {
-    console.log(`"${letter}" is correct`);
-    usedLetters.push(letter);
-    //revealedLetters.push(letter);
-    // checkStatus();
-    // for (i = 0; i < arrayRandomWord.length; i++) {
-      //   if arrayRandomWord[i] === letter {
-        
-        //   }
-        // }
-        topScore = topScore + countLettersInArray(letter);
-        //console.log(countLettersInArray(letter)); //CONTROL
-      } else if (arrayRandomWord.includes(letter.toLowerCase()) === false) {
-        console.log(`"${letter}" is wrong`);
-        usedLetters.push(letter);
-        lives = lives - 1;
-      }
-  if (lives <= 0) {
-    //console.log(`GAME OVER`);
-    //GAME OVER console line replaced with ascii art
-    console.clear();
-    console.log(constants.LOSE_SCREEN);
-    loopGoesOn = false;
+    consoleMessage = ifLetterCorrect();
+  } else if (arrayRandomWord.includes(letter.toLowerCase()) === false) {
+    consoleMessage = ifLetterWrong();
+  }
+  console.clear(); //so image of hangman stays at the same position in terminal
+  if (lives <= 1) {
+    displayGameOver();
     break;
   }
-  if (topScore === randomWord.length) {
-    //console.log(`YOU WIN`);
-    //YOU WIN console line replaced with ascii art
-    console.clear();
-    console.log(constants.HAPPY_HANGMAN_PIC);
-    console.log(constants.WIN_SCREEN); 
-    loopGoesOn = false;
+  if (topScore === onlyCountLettersInArray(arrayRandomWord)) {
+    displayGameWin();
     break;
   }
-
-
   
-  letter = prompt("Guess a letter!");
   checkStatus();
 }
 
@@ -127,38 +90,38 @@ function generateWordlist(difficulty) {
     }
   }
   return wordListTmp;
-}
+ }
 
 function introScreen() {
   let level = "n";
-
+  
   while (true) {
     console.log(constants.INTRO_SCREEN);
     console.log(
+      "(\"quit\" to exit game) \n" +
       "Pick difficulty level \n" +
       "EASY \t 3 - 5 letters (e)\n" +
       "NORMAL \t 6 - 9 letters t(n)\n" +
       "HARD \t 10 -  letters(h)\n");
-    level = prompt("e/n/h  :  ");
-    if (level === "e" || level === "n" || level === "h") {
-      break;
+      level = prompt("e/n/h  :  ");
+      if (level === "e" || level === "n" || level === "h") {
+        break;
+    } else if (level === "quit"){
+      process.exit(1);
     }
     else (prompt("No such option available"));
   };
   return level;
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// TODO:
-// add difficulty levels eg. word with character (3-5) easy, (5-8) normal, >8hard
 // The art sequence is adapted to the starting value of the lives parameter(at least between 3 and 7) – this means that the game over art is always the same.
-// display undercores and show revealed letters
-// put stuff from loop in functions at the end
 // clean code
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 // Add functions:
 function displayHangman() {
   let picNo = HANGMAN_PICS.length - lives;
-  console.log(`Guess all the letters! \n ("quit" to exit game)`);
+  console.log(`Guess all the letters! \n("quit" to exit game) \n`);
   console.log(HANGMAN_PICS[picNo]);
 }
 function checkEntry() {}
@@ -166,22 +129,18 @@ function checkRepetition() {}
 function checkLives() {
   // + display GAME OVERgit
 }
-function quitGame() {}
-function putCharactersToArray(randomWord) {
-  // let chars = randomWord.toLowerCase().split('');
-  // let array =[]
-  // for (i = 0; i < randomWord.length; i++) {
-  //     array.push(chars[i]);
-  // }
-  // return array;
-  return randomWord.toLowerCase().split("");
+
+function quitGame() {
+  //console.log(`GOOD-BYE`);
+  loopGoesOn = false;
+  return ('GOOD-BYE')
 }
 
 // why count letters
-function countLettersInArray(inputLetter) {
+function amountOfSameLetters() {
   let sameLetters = 0;
   for (i = 0; i < arrayRandomWord.length; i++) {
-    if (arrayRandomWord[i] === inputLetter) {
+    if (arrayRandomWord[i] === letter) {
       sameLetters = sameLetters + 1;
     }
   }
@@ -203,9 +162,51 @@ function displayUnderscores() {
   return array;
 }
 function checkStatus() {
+  let array = randomWord.split("");
+
   for (i = 0; i < randomWord.length; i++) {
-    if (arrayRandomWord[i] === letter /* && revealedLetters.includes(letter) */) {
-      arrayDisplayStatus[i] = letter +' ';
+
+    if (arrayRandomWord[i] === letter) {
+      arrayDisplayStatus[i] = array[i] +' ';
     }
   }
+}
+function onlyCountLettersInArray(array) {
+  let n = 0
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] !== ' ' && array[i] !== '.' && array[i] !== '-' ) {
+      n = n + 1;
+    }
+  }
+  return n;
+}
+function ifInputInvalid() {
+  return `Your entry "${letter}" is invalid!`;
+}
+function ifUsedLetter() {
+  return `You already revealed this letter. Choose another one!`;
+}
+function ifLetterCorrect() {
+  usedLetters.push(letter);
+  topScore = topScore + amountOfSameLetters();
+  //console.log(amountOfSameLetters()); //CONTROL
+  return `"${letter}" is correct`;
+}
+function ifLetterWrong() {
+  usedLetters.push(letter);
+  lives = lives - 1;
+  return `"${letter}" is wrong`;
+}
+function displayGameOver() {
+  //console.log(`GAME OVER`);
+  //GAME OVER console line replaced with ascii art
+  console.log(constants.LOSE_SCREEN);
+  loopGoesOn = false;
+}
+function displayGameWin() {
+  //console.log(`YOU WIN`);
+  //YOU WIN console line replaced with ascii art
+  console.log(constants.HAPPY_HANGMAN_PIC);
+  console.log(constants.WIN_SCREEN); 
+  loopGoesOn = false;
 }
