@@ -297,6 +297,3 @@ module.exports = {
   LOSE_SCREEN: LOSE_SCREEN,
   INTRO_SCREEN: INTRO_SCREEN
 };
-
-console.log(LOSE_SCREEN);
-console.log(WIN_SCREEN);
