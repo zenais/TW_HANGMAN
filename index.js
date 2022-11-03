@@ -124,8 +124,6 @@ function introScreen() {
   }
   return level;
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-//Add functions:
 
 //purpose: displays HANGMAN image depending on lives status
 function displayHangman() {
