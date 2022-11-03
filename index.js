@@ -40,8 +40,8 @@ while (loopGoesOn === true) {
   console.log(`${arrayDisplayStatus.join("")} \n`);
   console.log(consoleMessage);
 
-  letter = prompt("Guess a letter!");
-  //letter = letter.toLowerCase(); //so input is always lower case
+  letter = prompt("Guess a letter! ");
+  letter = letter.toLowerCase(); //so input is always lower case
   
   if (letter === "quit") {
     quitGame();
@@ -103,21 +103,12 @@ function introScreen() {
       "EASY \t 3 - 5 letters (e)\n" +
       "NORMAL \t 6 - 9 letters t(n)\n" +
       "HARD \t 10 -  letters(h)\n");
-<<<<<<< HEAD
-      level = prompt("e/n/h  :  ");
-      if (level === "e" || level === "n" || level === "h") {
-        break;
-    } else if (level === "quit"){
-      process.exit(1);
-    }
-=======
     level = prompt("e/n/h  :  ");
     if (level === "e" || level === "n" || level === "h") {
       break;
     } else if (level === "quit"){
       process.exit(1);
     } else (prompt("No such option available"));
->>>>>>> branchZinaida2.0
   };
   return level;
 }
