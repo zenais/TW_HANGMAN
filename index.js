@@ -135,6 +135,7 @@ function introScreen() {
   while (true) {
     console.log(constants.INTRO_SCREEN);
     console.log(
+      "(\"quit\" to exit game) \n" +
       "Pick difficulty level \n" +
       "EASY \t 3 - 5 letters (e)\n" +
       "NORMAL \t 6 - 9 letters t(n)\n" +
@@ -142,8 +143,9 @@ function introScreen() {
     level = prompt("e/n/h  :  ");
     if (level === "e" || level === "n" || level === "h") {
       break;
-    }
-    else (prompt("No such option available"));
+    } else if (level === "quit"){
+      process.exit(1);
+    } else (prompt("No such option available"));
   };
   return level;
 }
