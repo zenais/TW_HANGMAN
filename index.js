@@ -185,7 +185,7 @@ function ifInputInvalid() {
   return `Your entry "${letter}" is invalid!`;
 }
 function ifUsedLetter() {
-  return `You already revealed "${letter}". Choose another letter!`;
+  return `You already revealed "${letter}". Choose another letter! \n Used letters ${usedLetters.join(", ")}`;
 }
 function ifLetterCorrect() {
   usedLetters.push(letter.toLowerCase());
