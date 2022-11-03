@@ -16,28 +16,25 @@ const prompt = require("prompt-sync")({sigint: true});
 //THOMAS
 //add array for letters
 let usedLetters = [];
-let revealedLetters = [];
+// let revealedLetters = [];
 //add variable lives
 let lives = constants.HANGMAN_PICS.length;
 //console.log(`Lives: ${constants.HANGMAN_PICS.length}`); //CONTROL
 //add variable random Word from content.js
-let randomWord = "";
 //WORDS_TO_GUESS[Math.floor(Math.random() * WORDS_TO_GUESS.length)];
 //console.log(randomWord); //CONTROL
 // console.log(`Letters / TopScore: ${randomWord.length}`); //CONTROL
 // let x = randomWord.toLowerCase().split(''); //CONTROL
 // console.log(`Second Letter: ${x[2]}`); //CONTROL
-let arrayRandomWord = [];// = putCharactersToArray();
+// let arrayRandomWord = putCharactersToArray();
+
 //###########INTRO SCREEN#############
 console.clear();
 // display intro screen and ask for difficulty level e/n/h
 let difficulty = introScreen();
 let wordList = generateWordlist(difficulty); 
-
-randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-arrayRandomWord = putCharactersToArray(randomWord);
-console.log(arrayRandomWord);
-prompt();
+let randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+let arrayRandomWord = putCharactersToArray(randomWord);
 
 //####################################
 //console.log(arrayRandomWord); //CONTROL
