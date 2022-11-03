@@ -124,25 +124,23 @@ function introScreen() {
   }
   return level;
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+//Add functions:
 
+//purpose: displays HANGMAN image depending on lives status
 function displayHangman() {
   let picNo = HANGMAN_PICS.length - lives;
   console.log(`Guess all the letters! \n("quit" to exit game) \n`);
   console.log(HANGMAN_PICS[picNo]);
 }
-function checkEntry() {}
-function checkRepetition() {}
-function checkLives() {
-  // + display GAME OVERgit
-}
-
+//purpose: dislpays Good-bye and sets loop to false
 function quitGame() {
   console.log(`GOOD-BYE`);
   loopGoesOn = false;
   //return ('GOOD-BYE')
 }
 
-// why count letters
+//purpose: counts same letter in arrayRandomWord, later to use for subtraction from topscore
 function amountOfSameLetters() {
   let sameLetters = 0;
   for (i = 0; i < arrayRandomWord.length; i++) {
