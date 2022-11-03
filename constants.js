@@ -49,15 +49,6 @@ const HANGMAN_PICS = [
     "      |\n" +
     "=========",
 ];
-const HAPPY_HANGMAN_PIC = 
-    "  +---+\n" +
-    "      |\n" +
-    "      |\n" +
-    " \\O/  |\n" +
-    "  |   |\n" +
-    " / \\  |\n" +
-    "=========";
-
 const INTRO_SCREEN = 
 "\tW)      ww         l)L                                          t)                     \n"+
 "\tW)      ww          l)                                        t)tTTT                   \n"+
@@ -75,20 +66,22 @@ const INTRO_SCREEN =
 "H)    hh A)    aa N)    nn   G)ggg  M)      mm A)    aa N)    nn       v)    1)!!!!! ##  0))))\n";
 
 const WIN_SCREEN = 
-"Y)    yy  O)oooo  U)    uu    W)      ww I)iiii N)n   nn     !)   !)   !)  \n"+
-" Y)  yy  O)    oo U)    uu    W)      ww   I)   N)nn  nn    !)11 !)11 !)11 \n"+
-"  Y)yy   O)    oo U)    uu    W)  ww  ww   I)   N) nn nn    !)11 !)11 !)11 \n"+
-"   Y)    O)    oo U)    uu    W)  ww  ww   I)   N)  nnnn     !)   !)   !)  \n"+
-"   Y)    O)    oo U)    uu    W)  ww  ww   I)   N)   nnn                   \n"+
-"   Y)     O)oooo   U)uuuu      W)ww www  I)iiii N)    nn     !)   !)   !)  \n\n\n\n";
+"  +---+\t\n" + 
+"      |\t\t\Y)    yy  O)oooo  U)    uu    W)      ww I)iiii N)n   nn     !)   !)   !)  \n"+
+"      |\t\t Y)  yy  O)    oo U)    uu    W)      ww   I)   N)nn  nn    !)11 !)11 !)11 \n"+
+" \\O/  |\t\t  Y)yy   O)    oo U)    uu    W)  ww  ww   I)   N) nn nn    !)11 !)11 !)11 \n"+
+"  |   |\t\t   Y)    O)    oo U)    uu    W)  ww  ww   I)   N)  nnnn     !)   !)   !)  \n"+
+" / \\  |\t\t   Y)    O)    oo U)    uu    W)  ww  ww   I)   N)   nnn                   \n"+
+"=======\t\t   Y)     O)oooo   U)uuuu      W)ww www  I)iiii N)    nn     !)   !)   !)  \n\n\n\n";
 
 const LOSE_SCREEN =
-"Y)    yy  O)oooo  U)    uu    L)        O)oooo   S)ssss  E)eeeeee     !)   !)   !)  \n"+
-" Y)  yy  O)    oo U)    uu    L)       O)    oo S)    ss E)          !)11 !)11 !)11 \n"+
-"  Y)yy   O)    oo U)    uu    L)       O)    oo  S)ss    E)eeeee     !)11 !)11 !)11 \n"+
-"   Y)    O)    oo U)    uu    L)       O)    oo      S)  E)           !)   !)   !)  \n"+
-"   Y)    O)    oo U)    uu    L)       O)    oo S)    ss E)                         \n"+
-"   Y)     O)oooo   U)uuuu     L)llllll  O)oooo   S)ssss  E)eeeeee     !)   !)   !) \n\n\n\n";
+"  +---+\n" +
+"  |   |\t\tY)    yy  O)oooo  U)    uu    L)        O)oooo   S)ssss  E)eeeeee     !)   !)   !)  \n"+
+"  O   |\t\t Y)  yy  O)    oo U)    uu    L)       O)    oo S)    ss E)          !)11 !)11 !)11 \n"+
+" /|\\  |\t\t  Y)yy   O)    oo U)    uu    L)       O)    oo  S)ss    E)eeeee     !)11 !)11 !)11 \n"+
+" / \\  |\t\t   Y)    O)    oo U)    uu    L)       O)    oo      S)  E)           !)   !)   !)  \n"+
+"      |\t\t   Y)    O)    oo U)    uu    L)       O)    oo S)    ss E)                         \n"+
+"=======\t\t   Y)     O)oooo   U)uuuu     L)llllll  O)oooo   S)ssss  E)eeeeee     !)   !)   !) \n\n\n\n";
 
 // TODO: Fill this list with values about a certain topic
 // you are passionate about: e.g. famous scientists, chess players, ...
@@ -300,7 +293,6 @@ const WORDS_TO_GUESS = [
 module.exports = {
   HANGMAN_PICS: HANGMAN_PICS,
   WORDS_TO_GUESS: WORDS_TO_GUESS,
-  HAPPY_HANGMAN_PIC: HAPPY_HANGMAN_PIC,
   WIN_SCREEN: WIN_SCREEN,
   LOSE_SCREEN: LOSE_SCREEN,
   INTRO_SCREEN: INTRO_SCREEN
