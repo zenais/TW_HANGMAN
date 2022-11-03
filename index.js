@@ -34,51 +34,53 @@ let loopGoesOn = true; //add variable for looping
 let topScore = 0; //add variable for score
 let letter = ""; //add nothing so Startscreen doesnt display invaled input from beginning
 letter = letter.toLowerCase(); //so input is always lower case
-
+let consoleMessage = '';
 //add Loop (Gameplay)
 
 //###########INTRO SCREEN#############
 console.clear();
 // display intro screen and ask for difficulty level e/n/h
-let startDifficulty = introScreen();
+// let startDifficulty = introScreen();
 let wordList = [];
-if (startDifficulty === "e"){
-  for (let word of WORDS_TO_GUESS){
-    if (word.length <= 5 ) wordList.push(word);
-  }
-}else if (startDifficulty === "n"){
-  for (let word of WORDS_TO_GUESS){
-    if (word.length <= 5 ) wordList.push(word);
-  }
-}
-console.log(wordList);
-prompt();
+// if (startDifficulty === "e"){
+//   for (let word of WORDS_TO_GUESS){
+//     if (word.length <= 5 ) wordList.push(word);
+//   }
+// }else if (startDifficulty === "n"){
+//   for (let word of WORDS_TO_GUESS){
+//     if (word.length <= 5 ) wordList.push(word);
+//   }
+// }
+// console.log(wordList);
+// prompt();
 
 //####################################
 
 while (loopGoesOn === true) {
- 
-  console.clear(); //so image of hangman stays at the same position in terminal
-  
   displayHangman();
-
+  //console.log(lives); //CONTROL
   console.log(`${arrayDisplayStatus.join("")} \n`);
+  console.log(consoleMessage);
 
+  letter = prompt("Guess a letter!");
+  
   if (letter === "quit") {
     quitGame();
     break;
   } else if (letter === "") {
     null; //add nothing so Startscreen doesnt display invaled input from beginning
+    consoleMessage = '';
   } else if (letter.length !== 1 || /^[A-Za-z]/.test(letter) === false) {
-    ifInputInvalid();
+    consoleMessage = ifInputInvalid();
   } else if (usedLetters.includes(letter)) {
-    ifUsedLetter();
+    consoleMessage = ifUsedLetter();
   } else if (arrayRandomWord.includes(letter.toLowerCase()) === true) {
-    ifLetterCorrect();
+    consoleMessage = ifLetterCorrect();
   } else if (arrayRandomWord.includes(letter.toLowerCase()) === false) {
-    ifLetterWrong();
+    consoleMessage = ifLetterWrong();
   }
-  if (lives <= 0) {
+  console.clear(); //so image of hangman stays at the same position in terminal
+  if (lives <= 1) {
     displayGameOver();
     break;
   }
@@ -86,15 +88,13 @@ while (loopGoesOn === true) {
     displayGameWin();
     break;
   }
-
-  letter = prompt("Guess a letter!");
   
   checkStatus();
 }
 
 function introScreen() {
   let level = "n";
-
+  
   while (true) {
     console.log(constants.INTRO_SCREEN);
     console.log(
@@ -102,9 +102,9 @@ function introScreen() {
       "EASY \t 3 - 5 letters (e)\n" +
       "NORMAL \t 6 - 9 letters t(n)\n" +
       "HARD \t 10 -  letters(h)\n");
-    level = prompt("e/n/h  :  ");
-    if (level === "e" || level === "n" || level === "h") {
-      break;
+      level = prompt("e/n/h  :  ");
+      if (level === "e" || level === "n" || level === "h") {
+        break;
     }
   };
   return level;
@@ -129,8 +129,9 @@ function checkLives() {
   // + display GAME OVERgit
 }
 function quitGame() {
-  console.log(`GOOD-BYE`);
+  //console.log(`GOOD-BYE`);
   loopGoesOn = false;
+  return ('GOOD-BYE')
 }
 
 // why count letters
@@ -169,31 +170,29 @@ function checkStatus() {
 }
 function onlyCountLettersInArray(array) {
   let n = 0
-
   for (let i = 0; i < array.length; i++) {
     if (array[i] !== ' ' && array[i] !== '.' && array[i] !== '-' ) {
       n = n + 1;
     }
   }
-
   return n;
 }
 function ifInputInvalid() {
-  console.log(`Your entry "${letter}" is invalid!`);
+  return `Your entry "${letter}" is invalid!`;
 }
 function ifUsedLetter() {
-  console.log(`You already revealed this letter. Choose another one!`);
+  return `You already revealed this letter. Choose another one!`;
 }
 function ifLetterCorrect() {
-  console.log(`"${letter}" is correct`);
   usedLetters.push(letter);
   topScore = topScore + amountOfSameLetters();
   //console.log(amountOfSameLetters()); //CONTROL
+  return `"${letter}" is correct`;
 }
 function ifLetterWrong() {
-  console.log(`"${letter}" is wrong`);
   usedLetters.push(letter);
   lives = lives - 1;
+  return `"${letter}" is wrong`;
 }
 function displayGameOver() {
   //console.log(`GAME OVER`);
