@@ -41,7 +41,7 @@ while (loopGoesOn === true) {
   console.log(consoleMessage);
 
   letter = prompt("Guess a letter! ");
-  letter = letter.toLowerCase(); //so input is always lower case
+  //letter = letter.toLowerCase(); //so input is always lower case
   
   if (letter === "quit") {
     quitGame();
@@ -51,7 +51,7 @@ while (loopGoesOn === true) {
     consoleMessage = '';
   } else if (letter.length !== 1 || /^[A-Za-z]/.test(letter) === false) {
     consoleMessage = ifInputInvalid();
-  } else if (usedLetters.includes(letter)) {
+  } else if (usedLetters.includes(letter.toLowerCase())) {
     consoleMessage = ifUsedLetter();
   } else if (arrayRandomWord.includes(letter.toLowerCase()) === true) {
     consoleMessage = ifLetterCorrect();
@@ -186,13 +186,13 @@ function ifUsedLetter() {
   return `You already revealed "${letter}". Choose another letter!`;
 }
 function ifLetterCorrect() {
-  usedLetters.push(letter);
+  usedLetters.push(letter.toLowerCase());
   topScore = topScore + amountOfSameLetters();
   //console.log(amountOfSameLetters()); //CONTROL
   return `"${letter}" is correct`;
 }
 function ifLetterWrong() {
-  usedLetters.push(letter);
+  usedLetters.push(letter.toLowerCase());
   lives = lives - 1;
   return `"${letter}" is wrong`;
 }
