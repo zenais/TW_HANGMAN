@@ -14,11 +14,9 @@ let lives = constants.HANGMAN_PICS.length; //add variable lives
 
 
 //###########INTRO SCREEN#############
-// display intro screen and ask for difficulty level e/n/h
 let difficulty = introScreen();
 let wordList = generateWordlist(difficulty); 
 let randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-
 //####################################
 
 let arrayRandomWord = randomWord.toLowerCase().split("");
@@ -43,7 +41,7 @@ while (loopGoesOn === true) {
   letter = prompt("Guess a letter! ");
   //letter = letter.toLowerCase(); //so input is always lower case
   
-  if (letter === "quit") {
+  if (letter.toLowerCase() === "quit") {
     quitGame();
     break;
   } else if (letter === "") {
@@ -71,6 +69,16 @@ while (loopGoesOn === true) {
   checkStatus();
 }
 
+//////////////////////////////////////////////////////////////////////////////
+///////////////// FUNCTIONS //////////////////////////////////////////////////
+
+
+/* FUNCTION generateWordlist
+purpose:    function goes through values in WORDS_TO_GUESS list,
+            and assigns them to a new array (wordListTmp) in accordance
+            to difficulty.
+arguments: wordListTmp - copie of values from WORDS_TO_GUESS
+returns:   array of copied values */
 function generateWordlist(difficulty) {
   let wordListTmp = [];
   if (difficulty === "e") {
@@ -92,6 +100,12 @@ function generateWordlist(difficulty) {
   return wordListTmp;
  }
 
+
+/* FUNCTION introScreen
+purpose:  this function ask user for input in form of
+          a letter (e/n/h) or "quit". And displays all 
+          the options on console screen
+return:   return value is a character e, n or h  */
 function introScreen() {
   let level = "n";
   
@@ -105,6 +119,7 @@ function introScreen() {
       "NORMAL \t 6 - 9 letters \t(n)\n" +
       "HARD \t >10   letters \t(h)\n");
     level = prompt("e/n/h  :  ");
+    level = level.toLowerCase();
     if (level === "e" || level === "n" || level === "h") {
       break;
     } else if (level === "quit"){
@@ -115,8 +130,7 @@ function introScreen() {
   return level;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-//Add functions:
+
 
 function displayHangman() {
   let picNo = HANGMAN_PICS.length - lives;
