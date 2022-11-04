@@ -116,7 +116,7 @@ function introScreen() {
 //purpose: displays HANGMAN image depending on lives status
 function displayHangman() {
   let picNo = HANGMAN_PICS.length - lives;
-  console.log(`Guess all the letters! \n("quit" to exit game) \n`);
+  console.log(`Can you guess this city in Austria? \nGuess all the letters! \n("quit" to exit game) \n`);
   console.log(HANGMAN_PICS[picNo]);
 }
 //purpose: dislpays Good-bye and sets loop to false
